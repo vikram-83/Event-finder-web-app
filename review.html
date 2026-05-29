@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Add Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #007BFF;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      background: #0056b3;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav a:hover {
+      background: #004494;
+      color: #f2f2f2;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .form {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 400px;
+      margin: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form input, .form textarea, .form select {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+    .form input:focus, .form textarea:focus, .form select:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+    .form button {
+      padding: 10px 16px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .form button:hover {
+      background: #0056b3;
+    }
+    .form a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #007BFF;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .form a:hover {
+      color: #0056b3;
+    }
+    footer {
+      background: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Review Application</h1>
+  </header>
+
+  <nav>
+    <a href="p.html">Home</a>
+    <a href="add-review.html">Add Review</a>
+    <a href="review2.html">View Reviews</a>
+  </nav>
+
+  <div class="form">
+    <h2>Add a Review</h2>
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="url" id="dp" placeholder="Image URL" required />
+    <select id="rating">
+      <option value="5">5 Stars</option>
+      <option value="4.5">4.5 Stars</option>
+      <option value="4">4 Stars</option>
+      <option value="3.5">3.5 Stars</option>
+      <option value="3">3 Stars</option>
+    </select>
+    <textarea id="desc" rows="4" placeholder="Write your review..." required></textarea>
+    <button onclick="saveReview()">Submit Review</button><br><br><br>
+    <button><a href="review2.html">View All Reviews</a></button>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Review Application. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function saveReview() {
+      const name = document.getElementById("name").value;
+      const dp = document.getElementById("dp").value;
+      const rating = document.getElementById("rating").value;
+      const desc = document.getElementById("desc").value;
+
+      const review = { name, dp, rating, desc };
+
+      let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+      reviews.push(review);
+      localStorage.setItem("reviews", JSON.stringify(reviews));
+
+      alert("Review added successfully!");
+      document.getElementById("name").value = "";
+      document.getElementById("dp").value = "";
+      document.getElementById("rating").value = "5";
+      document.getElementById("desc").value = "";
+    }
+  </script>
+</body>
+</html>
